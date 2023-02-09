@@ -12,7 +12,7 @@ const refs = {
 };
 
 let timerId = null;
-let selectedDate = Date.now();
+let currentDate = null;
 
 const options = {
   enableTime: true,
@@ -21,7 +21,7 @@ const options = {
   minuteIncrement: 1,
 
   onClose(selectedDates) {
-    selectedDate = selectedDates[0];
+    currentDate = selectedDates[0];
     if (selectedDates[0] < new Date()) {
       Notiflix.Notify.failure('Please choose a date in the future');
       refs.startBtn.setAttribute('disabled', true);
@@ -41,7 +41,7 @@ function startCountdown() {
 }
 
 function timeOut() {
-  const getTimeComponents = selectedDate - new Date();
+  const getTimeComponents = currentDate - new Date();
 
   if (getTimeComponents <= 0) {
     Notiflix.Notify.success('Timer is Over!');
@@ -74,33 +74,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-// const timer = {
-//   intervalId: null,
-//   isActive:false,
-//
-//   start(){
-//     if (this.isActive) {
-//       return;
-//     }
-//     const startTime = datePicer.selectedDates[0];
-//     refs.startBtn.disable = true;
-//     refs.input.disabled = true;
-//     this.isActive = true;
-//
-//     this.intervalId = setInterval(()=> {
-//       const currentTime = Date.now();
-//       const deltaTime = startTime - currentTime;
-//       if (deltaTime < 0){
-//         clearInterval(this.intervalId);
-//         this.isActive = false;
-//         refs.startBtn.disable = true;
-//         refs.input.disabled = false;
-//         Notiflix.Notify.info('Countdown is over');
-//         return;
-//       }
-//       const timeComponents = convertMs(deltaTime);
-//       updateClockface(timeComponents);
-//     }, 1000);
-//   },
-// };

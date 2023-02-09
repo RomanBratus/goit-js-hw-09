@@ -13,14 +13,14 @@ function onStart() {
   timer = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
     }, 1000)
-  startBtn.disable = true;
-  stopBtn.disable = false;
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
 }
 
 function onStop (){
   clearInterval(timer);
-  startBtn.disable = false;
-  stopBtn.disable = true;
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
 }
 
 function getRandomHexColor() {
